@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="mt-4 modal-footer pb-0">
-                        <b-button class="transition-2 btn-success">Exportar .xls</b-button>
+                        <b-button @click="emitEvent()" class="transition-2 btn-success">Exportar .xls</b-button>
                     </div>
                 </b-modal>
             </div>
@@ -47,16 +47,22 @@
 export default {
     name: 'CardEmpresa',
     props: ['nome', 'codigo', 'cnpj', 'razaoSocial', 'inscricaoMunicipal', 'dataInclusao', 'statusEmpresa', 'responsavelLegal', 'email', 'telefoneContato', 'img'],
+
+    methods:{
+        emitEvent(){
+            this.$emit('generateExcel', this.codigo);
+        }
+    }
 }
 </script>
 
 <style scoped>
 .inactive{
-    background-color: #dc3545;
+    background-color: #c50d20;
 }
 
 .active{
-    background-color: rgb(23, 63, 182);
+    background-color: rgb(17, 54, 163);
 }
 
 img{
