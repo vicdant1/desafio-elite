@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Filtro -->
+    <!-- Filtro/Search -->
     <div class="row d-flex justify-content-center mt-5 mb-5">
       <b-form inline>
         <b-form-input class="mr-3" placeholder="Pesquisa" v-model="search">
@@ -12,7 +12,7 @@
       </b-form>
     </div>
 
-    <!-- Card Generate -->
+    <!-- Card Generate (v-for) -->
 
     <div class="container d-flex flex-wrap justify-content-center">
       <div class="row" v-for="empresa in itemsFiltered" :key="empresa">
@@ -30,6 +30,7 @@ export default {
 
   data(){
     return{
+      // data (simulando API)
       data: [
         {
           nome: 'Super Show Bis',
@@ -188,6 +189,9 @@ export default {
           img: 'https://files.aredacao.com.br/upload/content/zara-fechara-7-lojas-no-brasil-incluindo-unidade-de-goiania.jpg'
         },
       ],
+
+      // Campos da seleção
+
       search: "",
       select: null,
       options: [
@@ -204,6 +208,7 @@ export default {
     }
   },
   methods: {
+    // Excel individual
     initExcel(x){
       const data = [this.data[x]];
 
@@ -215,7 +220,7 @@ export default {
       XLSX.utils.book_append_sheet(wb, ws, 'export');
       XLSX.writeFile(wb, fileName);
     },
-
+    // Excel geral
     saveAsExcel(){
       const data = this.data;
 
@@ -227,12 +232,13 @@ export default {
       XLSX.utils.book_append_sheet(wb, ws, 'export');
       XLSX.writeFile(wb, fileName);
     },
-
+    // Clean Filtro
     limparFiltro(){
       this.search = "";
       this.select = null;
     }
   },
+  // Itens filtrados
   computed:{
     itemsFiltered(){
       let valores = [];
